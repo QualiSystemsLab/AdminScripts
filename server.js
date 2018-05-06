@@ -1,5 +1,7 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const bodyParser = require("body-parser");
+const app = express();
+
 
 //// ===================== python shell ===========================
 
@@ -25,6 +27,20 @@ pyshell.end(function (err, code, signal) {
 
 
 //// ===================== server ===========================
+
+// body parser for parsing the post request
+// app.use(bodyParser.urlencoded({
+//   extended: true
+// }));
+// app.use(bodyParser.json());
+
+// serves up html
+app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.post("/testing", function (request, response) {
+      console.log(request.body); //This prints the JSON document received (if it is a JSON document)
+});
 
 app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
