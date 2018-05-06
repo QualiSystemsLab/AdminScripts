@@ -1,0 +1,9 @@
+{
+	"Name": "Script Name",
+	"Description": "Script Description",
+	"Input Parameters": [
+		{"Parameter Name": "Parameter Value"},
+		{"Parameter Name2": "Parameter Value2"}
+	]
+
+}

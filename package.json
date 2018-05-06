@@ -19,7 +19,7 @@
   "homepage": "https://github.com/QualiSystemsLab/AdminScripts#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
-    "express": "^4.16.3",
+    "express": "^4.15.2",
     "python-shell": "^0.5.0"
   }
 }
