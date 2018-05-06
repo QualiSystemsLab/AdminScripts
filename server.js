@@ -1,6 +1,10 @@
 const express = require('express');
-const bodyParser = require("body-parser");
 const app = express();
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
+const bodyParser = require("body-parser");
+
 const PythonShell = require('python-shell');
 
 
@@ -8,6 +12,12 @@ const mockObj = {
   param1: "firstParameter",
   param2: "secondParameter"
 }
+
+//// ===================== socket IO ===========================
+
+io.on('connection', function (socket) {
+  console.log('a user connected');
+});
 
 //// ===================== python shell ===========================
 
@@ -76,4 +86,4 @@ app.post("/testing", function (request, response) {
 });
 
 app.get('/', (req, res) => res.send('Hello World!'))
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+http.listen(3000, () => console.log('Example app listening on port 3000!'))
