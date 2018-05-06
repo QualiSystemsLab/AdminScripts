@@ -56,16 +56,28 @@
 		]
 		},
 				{
-		"Name": "Change Bulk Users",
-		"File_Name": "ChangeBulkUsers.py",
-		"Description": "Script Description",
+		"Name": "Add user",
+		"File_Name": "add_user.py",
+		"Description": "script to add a new cloudshell user",
 		"Input_Parameters": [{
-				"Name": "Another Parameter Name",
-				"Value": "AnotherParameter Value"
+				"Name": "Username",
+				"Value": ""
 			},
 			{
-				"Name": "Yet Another Parameter Name",
-				"Value": "Yet Another Parameter Value"
+				"Name": "Password",
+				"Value": ""
+			},
+			{
+				"Name": "Email",
+				"Value": ""
+			},
+			{
+				"Name": "Groups",
+				"Value": ""
+			},
+			{
+				"Name": "Administrator",
+				"Value": ""
 			}
 		]
 		}
