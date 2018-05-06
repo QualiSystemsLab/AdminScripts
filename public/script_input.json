@@ -1,9 +1,31 @@
 {
-	"Name": "Script Name",
-	"Description": "Script Description",
-	"Input Parameters": [
-		{"Parameter Name": "Parameter Value"},
-		{"Parameter Name2": "Parameter Value2"}
-	]
+	"Scripts":[
+		{
+		"Name": "Script Name",
+		"Description": "Script Description",
+		"Input_Parameters": [{
+				"Name": "Parameter Name",
+				"Value": "Parameter Value"
 
+			},
+			{
+				"Name": "Second Parameter Name",
+				"Value": "Second Parameter Value"
+			}
+		]
+		},
+				{
+		"Name": "Second Script Name",
+		"Description": "Script Description",
+		"Input_Parameters": [{
+				"Name": "Another Parameter Name",
+				"Value": "AnotherParameter Value"
+			},
+			{
+				"Name": "Yet Another Parameter Name",
+				"Value": "Yet Another Parameter Value"
+			}
+		]
+		}
+]
 }
