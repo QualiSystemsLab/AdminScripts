@@ -5,7 +5,7 @@ import sys
 
 
 
-def get_cloudshell_session(credentialsFilePath = 'c:\cloudshell_admin_scripts\creds.json'):
+def get_cloudshell_session(credentialsFilePath = 'creds.json'):
     jsonfile = open(credentialsFilePath, 'r')
     credentials = json.load(jsonfile)
     jsonfile.close()

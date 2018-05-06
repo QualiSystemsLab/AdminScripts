@@ -21,21 +21,21 @@ io.on('connection', function (socket) {
 
 //// ===================== python shell ===========================
 
-function runPyShell(jsonString='{"param1":"yo"}') {
-  var shell = new PythonShell('my_script.py', { mode: 'text' });
+function runPyShell(jsonString) {
+  var shell = new PythonShell('./ChangeBulkResources/ChangeBulkResources.py', { mode: 'text' });
 
-  var options = {
-    mode: 'text',
-    args: ['my First Argument', 'My Second Argument']
-  };
+  // var options = {
+  //   mode: 'text',
+  //   args: ['my First Argument', 'My Second Argument']
+  // };
 
   // sends a message to the Python script via stdin
   // shell.send('hello');
   // shell.send(mockJSON);
 
   // shell.send(JSON.stringify([1, 2, 3, 4, 5]));
-  mockJSON = JSON.stringify(mockObj);
-  console.log('mockJSON from Node: ', mockJSON);
+  // mockJSON = JSON.stringify(mockObj);
+  // console.log('mockJSON from Node: ', mockJSON);
   // shell.send(mockJSON);
   shell.send(jsonString);
 

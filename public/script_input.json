@@ -7,11 +7,6 @@
 		"Input_Parameters": [{
 				"Name": "ResourceFamily",
 				"Value": ""
-
-			},
-			{
-				"Name": "ResourceModel",
-				"Value": ""
 			},
 			{
 				"Name": "ResourceModel",
