@@ -1,0 +1,24 @@
+{
+  "name": "adminscripts",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QualiSystemsLab/AdminScripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/QualiSystemsLab/AdminScripts/issues"
+  },
+  "homepage": "https://github.com/QualiSystemsLab/AdminScripts#readme",
+  "dependencies": {
+    "express": "^4.16.3",
+    "python-shell": "^0.5.0"
+  }
+}
