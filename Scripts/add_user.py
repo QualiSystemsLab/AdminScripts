@@ -114,8 +114,10 @@ debug_json_string = '''{ "admin script inputs": {
            
     }
 } '''
-a = add_cloudshell_user(debug_json_string)
-print a
+
+input_data = sys.stdin.read()
+out = add_cloudshell_user(input_data)
+print out
 
 
 
