@@ -1,6 +1,7 @@
 import cloudshell.api.cloudshell_api as api
 import cloudshell.api.common_cloudshell_api
 import json
+import sys
 
 def get_cloudshell_session(credentialsFilePath = 'c:\cloudshell_admin_scripts\creds.json'):
     jsonfile = open(credentialsFilePath, 'r')
@@ -80,6 +81,9 @@ def main_function_name (function_inputs = None):
         try:
             session.SetAttributeValue(currResource.FullPath, param_attributeName, param_attributeValue)
             affectedResources.append(currResource.FullName)
+
+            print "Changed ", param_attributeName, " in Resource ", currResource.FullName
+
         except cloudshell.api.common_cloudshell_api.CloudShellAPIError as e:
             print "resource: ", currResource.FullName, " Path: ", currResource.FullPath, \
                 " - have failed to change attribute: ", param_attributeName, " to Value: ", param_attributeValue, \
@@ -87,12 +91,13 @@ def main_function_name (function_inputs = None):
 
     return affectedResources
 
-input_data = '{' \
-             '"ResourceFamily":"Virtual Machine", ' \
-             '"ResourceModel":"Linux Virtual Machine",' \
-             '"NewAttributeName":"Enable_SSH", ' \
-             '"NewAttributeValue":""' \
-             '}'
+# input_data = '{' \
+#              '"ResourceFamily":"Virtual Machine", ' \
+#              '"ResourceModel":"Linux Virtual Machine",' \
+#              '"NewAttributeName":"Enable_SSH", ' \
+#              '"NewAttributeValue":""' \
+#              '}'
 
+input_data = sys.stdin.read()
 output = main_function_name(input_data)
 print output

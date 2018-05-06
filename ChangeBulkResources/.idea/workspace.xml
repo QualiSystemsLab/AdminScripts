@@ -24,8 +24,8 @@
       <file leaf-file-name="ChangeBulkResources.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ChangeBulkResources.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29433963">
-              <caret line="62" column="64" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="64" />
+            <state vertical-scroll-proportion="0.7509434">
+              <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -305,7 +305,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="70" y="-9" width="2292" height="1368" extended-state="0" />
+    <frame x="70" y="-9" width="2292" height="1368" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13280563" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -433,8 +433,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ChangeBulkResources.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29433963">
-          <caret line="62" column="64" selection-start-line="62" selection-start-column="47" selection-end-line="62" selection-end-column="64" />
+        <state vertical-scroll-proportion="0.7509434">
+          <caret line="101" column="38" selection-start-line="101" selection-start-column="38" selection-end-line="101" selection-end-column="38" />
           <folding>
             <element signature="e#0#43#0" expanded="true" />
           </folding>
