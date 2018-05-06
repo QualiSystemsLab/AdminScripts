@@ -2,7 +2,7 @@
 	"Scripts":[
 		{
 		"Name": "Change Bulk Resources",
-		"File_Name": "ChangeBulkResources.py"
+		"File_Name": "ChangeBulkResources.py",
 		"Description": "Change bulk resources attributes by...",
 		"Input_Parameters": [{
 				"Name": "ResourceFamily",
@@ -12,43 +12,43 @@
 			{
 				"Name": "ResourceModel",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "ResourceModel",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "AttributeValues",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "ShowAllDomains",
 				"Value": "True"
-			}
+			},
 			{
 				"Name": "ResourceFullName",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "IncludeSubResources",
 				"Value": "True"
-			}
+			},
 			{
 				"Name": "ResourceAddress",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "ResourceUniqueIdentifier",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "IncludeExcludedResources",
 				"Value": "True"
-			}
+			},
 			{
 				"Name": "NewAttributeName",
 				"Value": ""
-			}
+			},
 			{
 				"Name": "NewAttributeValue",
 				"Value": ""
@@ -57,7 +57,7 @@
 		},
 				{
 		"Name": "Change Bulk Users",
-		"File_Name": "ChangeBulkUsers.py"
+		"File_Name": "ChangeBulkUsers.py",
 		"Description": "Script Description",
 		"Input_Parameters": [{
 				"Name": "Another Parameter Name",
