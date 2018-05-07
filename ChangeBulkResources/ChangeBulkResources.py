@@ -3,7 +3,7 @@ import cloudshell.api.common_cloudshell_api
 import json
 import sys
 
-def get_cloudshell_session(credentialsFilePath = 'c:\cloudshell_admin_scripts\creds.json'):
+def get_cloudshell_session(credentialsFilePath = '../creds.json'):
     jsonfile = open(credentialsFilePath, 'r')
     credentials = json.load(jsonfile)
     jsonfile.close()
@@ -24,7 +24,7 @@ def main_function_name (function_inputs = None):
     if "NewAttributeName" not in parameters.keys():
         return "Missing new attribute name"
 
-    session = get_cloudshell_session('C:\Dev\QualiSystemsLab\AdminScripts\creds.json')
+    session = get_cloudshell_session()
     # use session to run your logic
 
     param_resourceFamily = ''
