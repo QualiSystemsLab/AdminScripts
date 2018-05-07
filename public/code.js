@@ -50,7 +50,17 @@ allText += `
             </div>
           </div>
 
-           ${parameters}
+          	${parameters}
+
+                      <div class='form-group row'>
+                <label for="col-5" class="col-5 col-form-label">Description:</label>   
+              <div class="col-5"> 
+              <input type=hidden name="file_name" class="form-control" value=${file.Scripts[i].File_Name} >
+                </div>
+            </div>
+
+
+           
     <button class="btn btn-primary btn-lg float-right" type="submit" id="submitbutton" >Run</button>
     </form>
       </div>

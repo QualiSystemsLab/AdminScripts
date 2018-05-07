@@ -5,7 +5,7 @@ import sys
 
 
 
-def get_cloudshell_session(credentialsFilePath = 'c:\cloudshell_admin_scripts\creds.json'):
+def get_cloudshell_session(credentialsFilePath = 'creds.json'):
     jsonfile = open(credentialsFilePath, 'r')
     credentials = json.load(jsonfile)
     jsonfile.close()
@@ -33,7 +33,23 @@ def add_cloudshell_user(function_inputs_json=None):
             cs_isAdmin = False
         else:
             cs_isAdmin = True
-            cs_groups = inputs.get('admin script inputs').get('Administrator')
+
+        cs_groups = inputs.get('admin script inputs').get('Groups')
+        if len(cs_groups) == 0:
+            if cs_isAdmin == False:
+                raise (Exception(
+                    "your user is non admin, and there are no groups to add - please specify at least one group"))
+            else:
+                cs_isAdmin = True
+                print "there is at least 1 group, adding user to the groups"
+
+
+
+
+
+        else:
+            cs_isAdmin = True
+
     pass
 
     cs_session = get_cloudshell_session()
@@ -41,7 +57,7 @@ def add_cloudshell_user(function_inputs_json=None):
     print "Adding a new user with the following details: "
     print "username is: {0}, password is:  {1}, Email is: {2}".format(cs_username,cs_password,cs_email)
     try:
-        cs_session.AddNewUser(username=cs_username, password=cs_password, email=cs_email, isAdmin=cs_isAdmin, isActive= True)
+        cs_session.AddNewUser(username=cs_username, password=cs_password, email=cs_email, isAdmin=cs_isAdmin, isActive=True)
         print "User created successfully"
     except:
         "some error"
@@ -54,7 +70,28 @@ def add_cloudshell_user(function_inputs_json=None):
     else:
         print ("There is some error with user details, please check")
 
+    if len(cs_groups) > 0:
+        print "Adding user to the following groups: "
+        for i in cs_groups:
+            print i
+            for attempt in range (2):
+                try:
+                    cs_session.AddUsersToGroup(usernames=[cs_username], groupName=i)
+                except Exception as e:
+                    if e.message.__contains__('Unable to find group named:'):
+                        cs_session.AddNewGroup(groupName=i, description="added by admin script", groupRole='Regular')
+                else:
+                    break
+            else:
+                break
+
+            print "breakpoint"
+
+
+
+
     return cs_username
+
 
 
 
@@ -66,8 +103,21 @@ debug_json_string = '''{ "admin script inputs": {
     }
 } '''
 
-a = add_cloudshell_user(debug_json_string)
-print a
+# with groups
+debug_json_string = '''{ "admin script inputs": {
+      "Username": "dan suck my balls",
+      "Password": "qweqwe123",
+      "Email": "dan.m@quali.com",
+      "Administrator": "True",
+      "Groups": ""
+      
+           
+    }
+} '''
+
+input_data = sys.stdin.read()
+out = add_cloudshell_user(input_data)
+print out
 
 
 
