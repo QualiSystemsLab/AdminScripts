@@ -1,0 +1,8 @@
+#output-console {
+  height: 400px;
+  background: black;
+  color: white;
+  font-family: monospace;
+  padding: 1rem;
+  border-radius: 5px;
+}

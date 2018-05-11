@@ -16,32 +16,29 @@ const mockObj = {
 //// ===================== socket IO ===========================
 
 io.on('connection', function (socket) {
-  console.log('a user connected');
+  console.log(`socket id: ${socket.id} connected`);
+  socket.on('disconnect', (reason) => {
+    console.log(`socket id: ${socket.id} disconnected because of: ${reason}`);
+  })
 });
 
 //// ===================== python shell ===========================
 
 function runPyShell(jsonString) {
-  var shell = new PythonShell('./ChangeBulkResources/ChangeBulkResources.py', { mode: 'text' });
+  var pyOutput = 'placeholding';
+  var requestObj = JSON.parse(jsonString);
+  socketId = requestObj.socket_id;
+  console.log(socketId);
+  var shell = new PythonShell('my_script.py', { mode: 'text' });
 
-  // var options = {
-  //   mode: 'text',
-  //   args: ['my First Argument', 'My Second Argument']
-  // };
-
-  // sends a message to the Python script via stdin
-  // shell.send('hello');
-  // shell.send(mockJSON);
-
-  // shell.send(JSON.stringify([1, 2, 3, 4, 5]));
-  // mockJSON = JSON.stringify(mockObj);
-  // console.log('mockJSON from Node: ', mockJSON);
-  // shell.send(mockJSON);
   shell.send(jsonString);
 
   shell.on('message', function (message) {
-    // received a message sent from the Python script (a simple "print" statement)
     console.log('onMessage: ', message);
+    pyOutput = message;
+    console.log('onmessage pyoutput:', pyOutput);
+  
+    io.to(socketId).emit('pyoutput', pyOutput);
   });
 
   // end the input stream and allow the process to exit
@@ -51,14 +48,10 @@ function runPyShell(jsonString) {
     console.log('The exit signal was: ' + signal);
     console.log('finished');
   });
+  console.log('after pyOutput:', pyOutput);
+  return pyOutput;
 }
 
-// Passing arguments
-// PythonShell.run('my_script.py', options, function (err, results) {
-//   if (err) throw err;
-//   // results is an array consisting of messages collected during execution
-//   console.log('results: %j', results);
-// });
 
 
 //// ===================== server ===========================
@@ -72,18 +65,25 @@ function runPyShell(jsonString) {
 // serves up html
 app.use(express.static(__dirname + '/public'));
 
-app.use(bodyParser.urlencoded({ extended: true }));
+var urlEncodedParser = bodyParser.urlencoded({ extended: true });
 
-app.post("/testing", function (request, response) {
+// create application/json parser
+var jsonParser = bodyParser.json()
+
+app.post("/testing", jsonParser, function (request, response) {
+  request.on('end', () => {
+    response.writeHead(200, { 'Content-Type': 'text/html' });
+  })
   console.log(request.body); //This prints the JSON document received (if it is a JSON document)
   console.log(typeof (request.body));
-  requestString = JSON.stringify(request.body);
+  requestString = JSON.stringify(request.body, null, 2);
   console.log(requestString);
-  console.log(typeof(requestString));
-
   runPyShell(requestString);
+  response.send({message: 'test parameters received! response coming back down a socket soon!'});
 
 });
+
+
 
 app.get('/', (req, res) => res.send('Hello World!'))
 http.listen(3000, () => console.log('Example app listening on port 3000!'))
