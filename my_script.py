@@ -1,7 +1,7 @@
 import sys
 import json
 
-print('python running from nodeJS')
+# print('python running from nodeJS')
 # print "\n".join(sys.argv)
 
 #Read data from stdin
@@ -11,11 +11,19 @@ def read_in():
     # Since our input would only be having one line, parse our JSON data from that
     # return json.loads(lines[0])
     return json.loads(load)
+    # return json.dumps(load)
+    # return lines
+    # return load
 
 def main():
     #get our data as an array from read_in()
-    lines = read_in()
-    print(lines)
+    output = read_in()
+    print("returning python output from socket: " + output["socket_id"])
+    print("whatever whatever")
+    # print(json.dumps(output))
+    # print('test output from python script!')
+
+    # sys.stdout.write(lines)
 
     # Sum  of all the items in the providen array
     # total_sum_inArray = 0
