@@ -5,4 +5,29 @@
   font-family: monospace;
   padding: 1rem;
   border-radius: 5px;
+  overflow: scroll;
+}
+
+.card-body {
+  padding: 2rem 5rem !important;
+}
+
+.submitbutton {
+  display: block !important;
+  width: 350px;
+  margin: 2.5rem auto 0;
+}
+
+.card {
+  margin-bottom: 1.5rem;
+}
+
+.jumbotron-headers {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fa-trash {
+  align-self: flex-end;
+  cursor: pointer;
 }

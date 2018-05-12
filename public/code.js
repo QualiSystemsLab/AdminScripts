@@ -3,20 +3,40 @@ socket.on('connect', () => {
   buildPage();
 });
 
-function noop() { };
-
-function clearOnce(outputText) {
-  clearOnce = noop; // swap the functions
-  outputText.innerHTML = '';
+function expandFirstCard() {
+  const firstCard = document.getElementById("collapse0");
+  firstCard.classList.add("show");
 }
 
-socket.on('pyoutput', function(data) {
+// clear placeholder text for first run
+function noop() { };
+function clearOnce(outputText) {
+  clearOnce = noop; // swap the functions
+  clearOutput(outputText);
+  outputText.innerHTML = '';
+
+}
+
+function clearOutput(outputText) {
+  outputText = document.getElementById('output-text');
+  outputText.innerHTML = '>';
+}
+
+function scrollConsole() {
+  var console = document.getElementById("output-console");
+  console.scrollTop = console.scrollHeight;
+}
+
+// on socket input, populate output console
+socket.on('pyoutput', function (data) {
   console.log(data);
   outputText = document.getElementById('output-text');
   clearOnce(outputText);
-  outputText.innerHTML += `> ${data} <br>` 
+  outputText.innerHTML += `> ${data} <br>`;
+  scrollConsole();
 })
 
+// promise wrapper for reading parameter json
 json_file_promise = fetch('script_input.json')
   .then(function (response) {
     return response.json();
@@ -25,11 +45,13 @@ json_file_promise = fetch('script_input.json')
     return myJson;
   });
 
+// building dynamic html in response to reading parameter json
 function buildPage() {
   json_file_promise.then(function (file) {
-    console.log(file);
+    // console.log(file);
     var fileString = JSON.stringify(file);
-    console.log(fileString);
+    // console.log(fileString);
+
     var accordion = document.getElementById('accordion');
     var allText = '';
     for (var i = 0; i < file.Scripts.length; i++) {
@@ -37,8 +59,8 @@ function buildPage() {
       for (var j = 0; j < file.Scripts[i].Input_Parameters.length; j++) {
         parameters += `
         <div class='form-group row'>
-          <label for="col-5" class="col-5 col-form-label">${file.Scripts[i].Input_Parameters[j].Name}:</label>   
-          <div class="col-5"> 
+          <label for="${file.Scripts[i].Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Scripts[i].Input_Parameters[j].Name}:</label>   
+          <div class="col-8"> 
             <input type="text" name="${file.Scripts[i].Input_Parameters[j].Name}" class="form-control" placeholder="${file.Scripts[i].Input_Parameters[j].Value}"> 
           </div>
         </div> 
@@ -56,12 +78,12 @@ function buildPage() {
           </h5>
         </div>
 
-        <div id="collapse${i.toString()}" class="collapse show" aria-labelledby="heading1" data-parent="#accordion">
-          <form id="forms-container">
-            <div class="card-body">
+        <div id="collapse${i.toString()}" class="collapse hide" aria-labelledby="heading1" data-parent="#accordion">
+          <div class="card-body">
+            <div class="script-desc">
               <div class='form-group row'>
-                <label for="col-5" class="col-5 col-form-label">Description:</label>   
-                <div class="col-5"> 
+                <label for="col-5" class="col-3 col-form-label">Description:</label>   
+                <div class="col-8"> 
                   <textarea type=text name="Description" class="form-control" rows="4" readonly>${file.Scripts[i].Description}</textarea> 
                 </div>
               </div>  
@@ -69,22 +91,28 @@ function buildPage() {
             
             <div id="params-container${i}">
               ${parameters}
-              <button class="btn btn-primary btn-lg float-right" id="submitbutton" onclick="runScript(event,'${file.Scripts[i].Name}', ${i.toString()})">Run</button>
+              <div class="col-12">
+                <button class="btn btn-primary btn-lg submitbutton" 
+                        onclick="runScript(event,'${file.Scripts[i].Name}', ${i.toString()})">
+                        Run Script
+                </button>
+              </div>
             </div>
           </div>
-        </form>
+        </div>
 
       </div>
-      `;
+      `
     }
     accordion.innerHTML = allText;
+    expandFirstCard()
 
   })
 }
 
 // post request
 function sendPost(inputJSON) {
-  fetch('http://localhost:3000/testing', {
+  fetch('http://localhost:3000/runscript', {
     method: 'POST',
     headers: {
       'Accept': 'application/json, text/plain, */*',

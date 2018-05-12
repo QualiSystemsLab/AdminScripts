@@ -17,9 +17,11 @@ def read_in():
 
 def main():
     #get our data as an array from read_in()
-    # output = read_in()
+    output = read_in()
+    print("returning python output from socket: " + output["socket_id"])
+    print("whatever whatever")
     # print(json.dumps(output))
-    print('test output from python script!')
+    # print('test output from python script!')
 
     # sys.stdout.write(lines)
 

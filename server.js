@@ -1,17 +1,10 @@
+var path = require('path');
 const express = require('express');
 const app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
 const bodyParser = require("body-parser");
-
 const PythonShell = require('python-shell');
-
-
-const mockObj = {
-  param1: "firstParameter",
-  param2: "secondParameter"
-}
 
 //// ===================== socket IO ===========================
 
@@ -52,8 +45,6 @@ function runPyShell(jsonString) {
   return pyOutput;
 }
 
-
-
 //// ===================== server ===========================
 
 // body parser for parsing the post request
@@ -65,25 +56,24 @@ function runPyShell(jsonString) {
 // serves up html
 app.use(express.static(__dirname + '/public'));
 
+// shortens directory path in html links
+app.use('/node_modules', express.static(path.join(__dirname, '/node_modules/')));
+
 var urlEncodedParser = bodyParser.urlencoded({ extended: true });
 
 // create application/json parser
 var jsonParser = bodyParser.json()
 
-app.post("/testing", jsonParser, function (request, response) {
+app.post("/runscript", jsonParser, function (request, response) {
   request.on('end', () => {
     response.writeHead(200, { 'Content-Type': 'text/html' });
   })
   console.log(request.body); //This prints the JSON document received (if it is a JSON document)
-  console.log(typeof (request.body));
   requestString = JSON.stringify(request.body, null, 2);
   console.log(requestString);
   runPyShell(requestString);
   response.send({message: 'test parameters received! response coming back down a socket soon!'});
-
 });
-
-
 
 app.get('/', (req, res) => res.send('Hello World!'))
 http.listen(3000, () => console.log('Example app listening on port 3000!'))
