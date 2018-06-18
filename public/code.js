@@ -57,11 +57,15 @@ function buildPage() {
     for (var i = 0; i < file.Scripts.length; i++) {
       var parameters = '';
       for (var j = 0; j < file.Scripts[i].Input_Parameters.length; j++) {
+        var mytype = ''
+
+//        mytype = file.scripts[i].Input_Parameters[j]
+        console.log(mytype)
         parameters += `
         <div class='form-group row'>
           <label for="${file.Scripts[i].Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Scripts[i].Input_Parameters[j].Name}:</label>   
           <div class="col-8"> 
-            <input type="text" name="${file.Scripts[i].Input_Parameters[j].Name}" class="form-control" placeholder="${file.Scripts[i].Input_Parameters[j].Value}"> 
+            <input type="text" name="${file.Scripts[i].Input_Parameters[j].Name}" class="form-control" placeholder="${file.Scripts[i].Input_Parameters[j].Value}">
           </div>
         </div> 
 		    `

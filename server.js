@@ -22,7 +22,7 @@ function runPyShell(jsonString) {
   var requestObj = JSON.parse(jsonString);
   socketId = requestObj.socket_id;
   console.log(socketId);
-  var shell = new PythonShell('my_script.py', { mode: 'text' });
+  var shell = new PythonShell('ChangeBulkResources/ChangeBulkResources.py', { mode: 'text' });
 
   shell.send(jsonString);
 

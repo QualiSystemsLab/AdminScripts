@@ -1,0 +1,50 @@
+{
+		"Name": "Change Bulk Resources",
+		"File_Name": "ChangeBulkResources.py",
+		"Description": "Change bulk resources attributes by...",
+		"Input_Parameters": [{
+				"Name": "ResourceFamily",
+				"Value": ""
+			},
+			{
+				"Name": "ResourceModel",
+				"Value": ""
+			},
+			{
+				"Name": "AttributeValues",
+				"Value": ""
+			},
+			{
+				"Name": "ShowAllDomains",
+				"Value": "True"
+			},
+			{
+				"Name": "ResourceFullName",
+				"Value": ""
+			},
+			{
+				"Name": "IncludeSubResources",
+				"Value": "True"
+			},
+			{
+				"Name": "ResourceAddress",
+				"Value": ""
+			},
+			{
+				"Name": "ResourceUniqueIdentifier",
+				"Value": ""
+			},
+			{
+				"Name": "IncludeExcludedResources",
+				"Value": "True"
+			},
+			{
+				"Name": "NewAttributeName",
+				"Value": ""
+			},
+			{
+				"Name": "NewAttributeValue",
+				"Value": ""
+			}
+		]
+		}

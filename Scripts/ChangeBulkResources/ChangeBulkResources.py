@@ -126,4 +126,5 @@ def main_function_name (function_inputs = None):
 
 input_data = sys.stdin.read()
 output = main_function_name(input_data)
+print "hello there!"
 print output
