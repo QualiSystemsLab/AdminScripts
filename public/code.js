@@ -53,17 +53,17 @@ function buildPage() {
 
   json_file_promise.then(function (file) {
     var fileString = JSON.stringify(file);
-//    console.log(fileString);
     var accordion = document.getElementById('accordion');
     var allText = '';
     for (var i = 0; i < 1 ; i++) {
       var parameters = '';
       for (var j = 0; j < file.Input_Parameters.length; j++) {
         var mytype = file.Input_Parameters[j].Type;
-//        console.log(mytype);
         typeof mytype !== "undefined" ? mytype : (mytype = "string");
         mytype = mytype.toLowerCase();
-//        console.log(mytype);
+        if (mytype == 'lookup'){
+           typeof file.Input_Parameters[j].Options !== "undefined" ? mytype : (mytype = "string");
+        }
         if (mytype == 'string'){
         parameters += `
             <div class='form-group row'>
