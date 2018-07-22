@@ -25,6 +25,8 @@
     "jquery": "^3.3.1",
     "popper.js": "^1.14.3",
     "python-shell": "^0.5.0",
+    "file-system": "^2.2.2",
+    "find": "^0.2.9",
     "socket.io": "^2.1.0"
   }
 }

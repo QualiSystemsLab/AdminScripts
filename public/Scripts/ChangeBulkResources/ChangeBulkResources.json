@@ -16,7 +16,8 @@
 			},
 			{
 				"Name": "ShowAllDomains",
-				"Value": "True"
+				"Value": "True",
+				"Type": "Boolean"
 			},
 			{
 				"Name": "ResourceFullName",
@@ -24,7 +25,8 @@
 			},
 			{
 				"Name": "IncludeSubResources",
-				"Value": "True"
+				"Value": "True",
+                "Type": "Boolean"
 			},
 			{
 				"Name": "ResourceAddress",
@@ -36,11 +38,15 @@
 			},
 			{
 				"Name": "IncludeExcludedResources",
-				"Value": "True"
+				"Value": "True",
+                "Type": "Boolean"
 			},
 			{
 				"Name": "NewAttributeName",
-				"Value": ""
+				"Value": "",
+                "Type": "Lookup",
+                "Options":
+                    ["a", "b", "d"]
 			},
 			{
 				"Name": "NewAttributeValue",

@@ -10,6 +10,7 @@ function expandFirstCard() {
 
 // clear placeholder text for first run
 function noop() { };
+
 function clearOnce(outputText) {
   clearOnce = noop; // swap the functions
   clearOutput(outputText);
@@ -36,8 +37,9 @@ socket.on('pyoutput', function (data) {
   scrollConsole();
 })
 
+
 // promise wrapper for reading parameter json
-json_file_promise = fetch('script_input.json')
+json_file_promise = fetch('/Scripts/ChangeBulkResources/ChangeBulkResources.json')
   .then(function (response) {
     return response.json();
   })
@@ -45,39 +47,78 @@ json_file_promise = fetch('script_input.json')
     return myJson;
   });
 
+
 // building dynamic html in response to reading parameter json
 function buildPage() {
-  json_file_promise.then(function (file) {
-    // console.log(file);
-    var fileString = JSON.stringify(file);
-    // console.log(fileString);
 
+  json_file_promise.then(function (file) {
+    var fileString = JSON.stringify(file);
+//    console.log(fileString);
     var accordion = document.getElementById('accordion');
     var allText = '';
-    for (var i = 0; i < file.Scripts.length; i++) {
+    for (var i = 0; i < 1 ; i++) {
       var parameters = '';
-      for (var j = 0; j < file.Scripts[i].Input_Parameters.length; j++) {
-        var mytype = ''
-
-//        mytype = file.scripts[i].Input_Parameters[j]
-        console.log(mytype)
+      for (var j = 0; j < file.Input_Parameters.length; j++) {
+        var mytype = file.Input_Parameters[j].Type;
+//        console.log(mytype);
+        typeof mytype !== "undefined" ? mytype : (mytype = "string");
+        mytype = mytype.toLowerCase();
+//        console.log(mytype);
+        if (mytype == 'string'){
         parameters += `
-        <div class='form-group row'>
-          <label for="${file.Scripts[i].Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Scripts[i].Input_Parameters[j].Name}:</label>   
-          <div class="col-8"> 
-            <input type="text" name="${file.Scripts[i].Input_Parameters[j].Name}" class="form-control" placeholder="${file.Scripts[i].Input_Parameters[j].Value}">
-          </div>
-        </div> 
+            <div class='form-group row'>
+              <label for="${file.Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Input_Parameters[j].Name}:</label>
+              <div class="col-8">
+
+                <input type="text" name="${file.Input_Parameters[j].Name}" class="form-control" placeholder="${file.Input_Parameters[j].Value}">
+              </div>
+            </div>
 		    `
       }
+      else if (mytype == 'boolean'){
+              parameters += `
+            <div class='form-group row'>
+              <label for="${file.Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Input_Parameters[j].Name}:</label>
+              <div class="col-8">
 
+                <input type="checkbox" name="${file.Input_Parameters[j].Name}" class="form-control" placeholder="${file.Input_Parameters[j].Value}">
+              </div>
+            </div>
+		    `
+
+      }
+      else if (mytype == 'lookup'){
+                       for (var k=0 ; k < file.Input_Parameters[j].Options.length; k++ ){
+
+                        console.log(file.Input_Parameters[j].Options[k])}
+              parameters += `
+            <div class='form-group row'>
+              <label for="${file.Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Input_Parameters[j].Name}:</label>
+              <div class="col-8">
+
+                    <select name="${file.Input_Parameters[j]}" >`
+                       for (var k=0 ; k < file.Input_Parameters[j].Options.length; k++ ){
+                        parameters += `
+                            <option value="${file.Input_Parameters[j].Options[k]}">${file.Input_Parameters[j].Options[k]}</option>
+                            `
+                        }
+
+               parameters += `
+                       </select>
+
+              </div>
+            </div>
+		    `
+
+      }
+}
       allText += `
       <div class="card">
         <div class="card-header" id="heading${i.toString()}">
           
           <h5 class="mb-0">
             <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${i.toString()}" data-parent="#accordion">
-              ${file.Scripts[i].Name}
+              ${file.Name}
             </button>
           </h5>
         </div>
@@ -88,7 +129,7 @@ function buildPage() {
               <div class='form-group row'>
                 <label for="col-5" class="col-3 col-form-label">Description:</label>   
                 <div class="col-8"> 
-                  <textarea type=text name="Description" class="form-control" rows="4" readonly>${file.Scripts[i].Description}</textarea> 
+                  <textarea type=text name="Description" class="form-control" rows="4" readonly>${file.Description}</textarea>
                 </div>
               </div>  
             </div>
@@ -97,7 +138,7 @@ function buildPage() {
               ${parameters}
               <div class="col-12">
                 <button class="btn btn-primary btn-lg submitbutton" 
-                        onclick="runScript(event,'${file.Scripts[i].Name}', ${i.toString()})">
+                        onclick="runScript(event,'${file.Name}', ${i.toString()})">
                         Run Script
                 </button>
               </div>

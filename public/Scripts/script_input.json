@@ -1,0 +1,80 @@
+{
+	"Scripts":[
+		{
+		"Name": "Change Bulk Resources",
+		"File_Name": "ChangeBulkResources.py",
+		"Description": "Change bulk resources attributes by...",
+		"Input_Parameters": [{
+				"Name": "ResourceFamily",
+				"Value": ""
+			},
+			{
+				"Name": "ResourceModel",
+				"Value": ""
+			},
+			{
+				"Name": "AttributeValues",
+				"Value": ""
+			},
+			{
+				"Name": "ShowAllDomains",
+				"Value": "True"
+			},
+			{
+				"Name": "ResourceFullName",
+				"Value": ""
+			},
+			{
+				"Name": "IncludeSubResources",
+				"Value": "True"
+			},
+			{
+				"Name": "ResourceAddress",
+				"Value": ""
+			},
+			{
+				"Name": "ResourceUniqueIdentifier",
+				"Value": ""
+			},
+			{
+				"Name": "IncludeExcludedResources",
+				"Value": "True"
+			},
+			{
+				"Name": "NewAttributeName",
+				"Value": ""
+			},
+			{
+				"Name": "NewAttributeValue",
+				"Value": ""
+			}
+		]
+		},
+				{
+		"Name": "Add user",
+		"File_Name": "add_user.py",
+		"Description": "script to add a new cloudshell user",
+		"Input_Parameters": [{
+				"Name": "Username",
+				"Value": ""
+			},
+			{
+				"Name": "Password",
+				"Value": ""
+			},
+			{
+				"Name": "Email",
+				"Value": ""
+			},
+			{
+				"Name": "Groups",
+				"Value": ""
+			},
+			{
+				"Name": "Administrator",
+				"Value": ""
+			}
+		]
+		}
+]
+}
