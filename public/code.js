@@ -70,27 +70,28 @@ function buildPage() {
               <label for="${file.Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Input_Parameters[j].Name}:</label>
               <div class="col-8">
 
-                <input type="text" name="${file.Input_Parameters[j].Name}" class="form-control" placeholder="${file.Input_Parameters[j].Value}">
+                <input type="text" value="${file.Input_Parameters[j].Value}" name="${file.Input_Parameters[j].Name}" class="form-control">
               </div>
             </div>
 		    `
       }
       else if (mytype == 'boolean'){
+              console.log(file.Input_Parameters[j].Value.toLowerCase())
+              if (file.Input_Parameters[j].Value.toLowerCase() == 'true'){var checkboxvalue = 'checked'}
+              else {var checkboxvalue = 'unchecked'}
+              console.log(checkboxvalue)
               parameters += `
             <div class='form-group row'>
               <label for="${file.Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Input_Parameters[j].Name}:</label>
               <div class="col-8">
 
-                <input type="checkbox" name="${file.Input_Parameters[j].Name}" class="form-control" placeholder="${file.Input_Parameters[j].Value}">
+                <input type="checkbox" name="${file.Input_Parameters[j].Name}" class="form-control" ${checkboxvalue}>
               </div>
             </div>
 		    `
 
       }
       else if (mytype == 'lookup'){
-                       for (var k=0 ; k < file.Input_Parameters[j].Options.length; k++ ){
-
-                        console.log(file.Input_Parameters[j].Options[k])}
               parameters += `
             <div class='form-group row'>
               <label for="${file.Input_Parameters[j].Name}" class="col-3 col-form-label">${file.Input_Parameters[j].Name}:</label>

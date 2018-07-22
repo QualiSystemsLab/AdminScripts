@@ -21,11 +21,11 @@
 			},
 			{
 				"Name": "ResourceFullName",
-				"Value": ""
+				"Value": "resourceName"
 			},
 			{
 				"Name": "IncludeSubResources",
-				"Value": "True",
+				"Value": "False",
                 "Type": "Boolean"
 			},
 			{
